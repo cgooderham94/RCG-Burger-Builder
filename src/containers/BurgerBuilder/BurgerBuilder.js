@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -20,7 +22,8 @@ class BurgerBuilder extends Component {
             bacon: 0
         },
         totalPrice: 3.99,
-        purchasable: false
+        purchasable: false,
+        purchasing: false,
     }
 
     updatePurchaseState (ingredients) {
@@ -98,6 +101,18 @@ class BurgerBuilder extends Component {
         this.updatePurchaseState(updatedIngredients);
     }
 
+    purchaseHandler = () => {
+        this.setState({purchasing: true});
+    }
+
+    purchaseCancelHandler = () => {
+        this.setState({purchasing: false});
+    }
+
+    purchaseContinueHandler = () => {
+        alert('You can continue');
+    }
+
     render() {
         const disableInfo = {
             ...this.state.ingredients
@@ -109,13 +124,22 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+                    <OrderSummary 
+                        totalPrice={this.state.totalPrice}
+                        purchaseCanceled={this.purchaseCancelHandler}
+                        purchaseContinue={this.purchaseContinueHandler}
+                        ingredients={this.state.ingredients}/>
+                </Modal>
+
                 <Burger ingredients={this.state.ingredients}/>
 
                 <BuildControls ingredientAdded={this.addIngredientHandler}
                                ingredientRemoved={this.removeIngredientHandler}
                                disabled={disableInfo}
                                purchasable={this.state.purchasable}
-                               totalPrice={this.state.totalPrice}/>
+                               totalPrice={this.state.totalPrice} 
+                               ordered={this.purchaseHandler}/>
             </Aux>
         );
     }
