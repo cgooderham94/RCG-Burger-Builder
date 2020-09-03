@@ -24,7 +24,7 @@ const orderSummary = (props) => {
             </ul>
 
             <p>
-                <strong>Price: £{props.totalPrice}</strong>
+                <strong>Price: £{props.totalPrice.toFixed(2)}</strong>
             </p>
 
             <p>Continue to checkout?</p>
