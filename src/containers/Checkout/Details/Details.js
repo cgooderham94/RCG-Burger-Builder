@@ -106,14 +106,41 @@ class Details extends Component {
         console.log(this.props.ingredients);
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        }
+
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+        this.setState({orderForm: updatedOrderForm});
+    }
+
     render() {
+        const formElementsArray = [];
+
+        for (let key in this.state.orderForm) {
+            formElementsArray.push({
+                id: key,
+                config: this.state.orderForm[key]
+            })
+        }
+
         let form = (
             <form>
-                <Input elementType="..." elementConfig="..." value="..."/>
-                <Input inputtype="input" type="email" name="email" placeholder="Your Email" />
-                <Input inputtype="input" type="text" name="street" placeholder="Street" />
-                <Input inputtype="input" type="text" name="city" placeholder="City" />
-                <Input inputtype="input" type="text" name="postcode" placeholder="Post Code" />
+                {formElementsArray.map(formElement => (
+                    <Input 
+                        key={formElement.id}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                        elementType={formElement.config.elementType} 
+                        elementConfig={formElement.config.elementConfig} 
+                        value={formElement.config.value}/>
+                ))}
 
                 <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
             </form>
