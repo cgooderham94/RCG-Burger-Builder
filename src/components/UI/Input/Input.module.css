@@ -1,0 +1,25 @@
+.FieldContainer:not(:first-child) {
+    margin-top: 0.5rem;
+}
+
+.Label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+}
+
+.InputElement {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.InputElement:focus {
+    outline: none;
+    border: 1px solid #aaa;    
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './Details.module.css';
@@ -7,6 +8,69 @@ import axios from '../../../axios-orders';
 
 class Details extends Component {
     state = {
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    name: 'name',
+                    placeholder: 'Your Name'
+                },
+                value: ''
+            },
+            street: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    name: 'street',
+                    placeholder: 'Your Street'
+                },
+                value: ''
+            },
+            postCode: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    name: 'postCode',
+                    placeholder: 'Post Code'
+                },
+                value: ''
+            },
+            country: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    name: 'name',
+                    placeholder: 'Country'
+                },
+                value: ''
+            },
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    name: 'email',
+                    placeholder: 'Email Address'
+                },
+                value: ''
+            },
+            deliveryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {
+                            value: 'fastest',
+                            label: 'Fastest'
+                        },
+                        {
+                            value: 'cheapest',
+                            label: 'Cheapest'
+                        }
+                    ]
+                },
+                value: ''
+            }
+        },
         name: '',
         email: '',
         address: {
@@ -20,21 +84,15 @@ class Details extends Component {
     orderHandler = (event) => {
         event.preventDefault();
 
+        console.log(this.props);
+
         alert('You can continue');
 
         this.setState({loading: true});
 
         let order = {
             ingredients: this.props.ingredients,
-            price: this.props.price,
-            customer: {
-                name: 'Charlie',
-                address: '1 The Street',
-                postCode: 'AA11 BBB',
-                country: 'United Kingdom',
-                email: 'cgooderham94@gmail.com'
-            },
-            deliveryMethod: 'UBER Eats'
+            price: this.props.price
         }
 
         axios.post('/orders.json', order)
@@ -51,11 +109,11 @@ class Details extends Component {
     render() {
         let form = (
             <form>
-                <input className={classes.Input} type="text" name="name" placeholder="Your Name" />
-                <input className={classes.Input} type="email" name="email" placeholder="Your Email" />
-                <input className={classes.Input} type="text" name="street" placeholder="Street" />
-                <input className={classes.Input} type="text" name="city" placeholder="City" />
-                <input className={classes.Input} type="text" name="postcode" placeholder="Post Code" />
+                <Input elementType="..." elementConfig="..." value="..."/>
+                <Input inputtype="input" type="email" name="email" placeholder="Your Email" />
+                <Input inputtype="input" type="text" name="street" placeholder="Street" />
+                <Input inputtype="input" type="text" name="city" placeholder="City" />
+                <Input inputtype="input" type="text" name="postcode" placeholder="Post Code" />
 
                 <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
             </form>
