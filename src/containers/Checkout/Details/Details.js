@@ -96,6 +96,7 @@ class Details extends Component {
                     ]
                 },
                 value: 'fastest',
+                validation: {},
                 valid: true,
                 touched: false
             }
