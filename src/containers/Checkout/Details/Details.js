@@ -96,7 +96,7 @@ class Details extends Component {
                     ]
                 },
                 value: 'fastest',
-                valid: false,
+                valid: true,
                 touched: false
             }
         },
@@ -107,6 +107,7 @@ class Details extends Component {
             city: '',
             postCode: ''
         },
+        formIsValid: false,
         loading: false
     }
 
@@ -134,8 +135,6 @@ class Details extends Component {
             }).catch(error => {
                 this.setState({loading: false});
             });
-
-        console.log(this.props.ingredients);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -152,9 +151,13 @@ class Details extends Component {
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-        console.log(updatedFormElement);
+        var formIsValid = true;
 
-        this.setState({orderForm: updatedOrderForm});
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        }
+
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
     }
 
     checkValidity = (value, rules) => {
@@ -199,7 +202,7 @@ class Details extends Component {
                         value={formElement.config.value}/>
                 ))}
 
-                <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+                <Button btnType="Success" clicked={this.orderHandler} disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
 
