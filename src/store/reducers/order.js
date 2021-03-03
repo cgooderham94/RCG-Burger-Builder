@@ -9,7 +9,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.PUCHASE_INIT:
+        case actionTypes.PURCHASE_INIT:
             return updateObj(state, {
                 purchased: false
             })
@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
             
             return updateObj(state, {
                 loading: false,
-                order: state.orders.concat(newOrder),
+                orders: state.orders.concat(newOrder),
                 purchased: true
             });
         case actionTypes.PURCHASE_BURGER_FAIL:
@@ -41,6 +41,19 @@ const reducer = (state = initialState, action) => {
                 loading: false
             });
         case actionTypes.FETCH_ORDERS_FAIL:
+            return updateObj(state, {
+                loading: false
+            });
+        case actionTypes.DELETE_ORDER_START:
+            return updateObj(state, {
+                loading: true
+            });
+        case actionTypes.DELETE_ORDER_SUCCESS:
+            return updateObj(state, {
+                orders: action.orders,
+                loading: false
+            });
+        case actionTypes.DELETE_ORDER_FAIL:
             return updateObj(state, {
                 loading: false
             });

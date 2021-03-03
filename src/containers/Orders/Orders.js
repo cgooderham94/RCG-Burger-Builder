@@ -10,6 +10,10 @@ class Orders extends Component {
         this.props.onFetchOrders();
     }
 
+    onDeleteHandler = () => {
+        console.log('Deleting!');
+    }
+
     render() {
         let orders = <Spinner />;
 
@@ -18,8 +22,10 @@ class Orders extends Component {
                 this.props.orders.map(order => 
                     <Order 
                         key={order.id} 
+                        orderId={order.id}
                         ingredients={order.ingredients} 
-                        price={order.price}/>
+                        price={order.price} 
+                        delete={() => this.onDeleteHandler}/>
                 )
         }
 
@@ -40,7 +46,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchOrders: () => dispatch(actions.fetchOrders())
+        onFetchOrders: () => dispatch(actions.fetchOrders()),
+        // onDeleteOrder: (orderId) => console.log(orderId)
     }
 }
 

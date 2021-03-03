@@ -39,7 +39,7 @@ export const purchaseBurger = (orderData) => {
 
 export const purchaseInit = () => {
     return {
-        type: actionTypes.PUCHASE_INIT
+        type: actionTypes.PURCHASE_INIT
     }
 }
 
@@ -82,5 +82,33 @@ export const fetchOrders = () => {
             .catch(error => {
                 dispatch(fetchOrdersFail(error));
             });
+    }
+}
+
+export const deleteOrderStart = () => {
+    return {
+        type: actionTypes.DELETE_ORDER_START
+    }
+}
+
+export const deleteOrderSuccess = (orders) => {
+    return {
+        type: actionTypes.DELETE_ORDER_SUCCESS,
+        orders: orders
+    }
+}
+
+export const deleteOrderFail = (error) => {
+    return {
+        type: actionTypes.DELETE_ORDER_FAIL,
+        error: error
+    }
+}
+
+export const deleteOrder = (orderId) => {
+    return dispatch => {
+        dispatch(deleteOrderStart());
+
+        console.log(orderId);
     }
 }

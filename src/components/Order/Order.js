@@ -1,5 +1,4 @@
 import React from 'react';
-
 import classes from './Order.module.css';
 
 const order = (props) => {
@@ -27,6 +26,7 @@ const order = (props) => {
         <div className={classes.Order}>
             <p>Ingredients: {ingredientOutput}</p>
             <p>Price: <strong>GBP {Number.parseFloat(props.price).toFixed(2)}</strong></p>
+            <button onClick={props.delete(props.orderId)}>Delete Order</button>
         </div> 
     )
 }
