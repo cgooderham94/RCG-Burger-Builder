@@ -129,7 +129,7 @@ class Details extends Component {
             orderData: formData
         }
 
-        this.props.onOrderSubmitted(order);
+        this.props.onOrderSubmitted(order, this.props.authToken);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -217,6 +217,7 @@ class Details extends Component {
 
 const mapStateToProps = state => {
     return {
+        authToken: state.auth.token,
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading
@@ -225,7 +226,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderSubmitted: (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderSubmitted: (orderData, authToken) => dispatch(actions.purchaseBurger(orderData, authToken))
     }
 }
 
