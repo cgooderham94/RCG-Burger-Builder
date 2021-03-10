@@ -1,0 +1,5 @@
+.Error {
+    padding: 1rem;
+    border: 1px solid red;
+    background-color: lightgray;
+}

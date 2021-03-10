@@ -1,6 +1,5 @@
 import * as actionTypes from './../actions/actionTypes';
 import { updateObj } from '../utility';
-import { bindActionCreators } from 'redux';
 
 const initialState = {
     token: null,
@@ -38,7 +37,7 @@ const reducer = (state = initialState, action) => {
             return authStart(state)
         case actionTypes.AUTH_SUCCESS:
             return authSuccess(state, action);
-        case actionTypes.AUTH_START:
+        case actionTypes.AUTH_FAIL:
             return authFail(state, action)
         default:
             return state;
