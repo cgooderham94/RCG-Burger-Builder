@@ -10,5 +10,6 @@ export {
     deleteOrder
 } from './order';
 export {
-    auth
+    auth,
+    authLogout
 } from './auth';
