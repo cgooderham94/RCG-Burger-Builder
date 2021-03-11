@@ -11,5 +11,6 @@ export {
 } from './order';
 export {
     auth,
-    authLogout
+    authLogout,
+    setAuthRedirectPath
 } from './auth';
