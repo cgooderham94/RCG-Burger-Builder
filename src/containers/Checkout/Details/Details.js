@@ -8,7 +8,7 @@ import classes from './Details.module.css';
 import axios from '../../../axios-orders';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
-import { updateObj } from '../../../shared/utility';
+import { updateObj, checkValidity } from '../../../shared/utility';
 
 class Details extends Component {
     state = {
@@ -137,7 +137,7 @@ class Details extends Component {
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedFormElement = updateObj(this.state.orderForm[inputIdentifier], {
             value: event.target.value,
-            valid: this.checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+            valid: checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
             touched: true
         });
 
@@ -152,24 +152,6 @@ class Details extends Component {
         }
 
         this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
-    }
-
-    checkValidity = (value, rules) => {
-        let isValid = true;
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        return isValid;
     }
 
     render() {
