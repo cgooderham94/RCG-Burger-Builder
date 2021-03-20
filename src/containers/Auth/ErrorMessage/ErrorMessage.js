@@ -2,8 +2,6 @@ import React from 'react';
 import classes from './ErrorMessage.module.css';
 
 const errorMessage = (props) => {
-    let message = '';
-
     switch (props.message) {
         case 'EMAIL_EXISTS':
             return <p className={classes.Error}>Email already exists, duh!</p>
