@@ -27,11 +27,8 @@ export const purchaseBurger = (orderData, authToken) => {
 
         axios.post('/orders.json?auth=' + authToken, orderData)
             .then(response => {
-                console.log(response.data);
-                console.log(orderData);
                 dispatch(purchaseBurgerSuccess(response.data.name, orderData));
             }).catch(error => {
-                console.log(error);
                 dispatch(purchaseBurgerFail(error));
             });
     }
@@ -110,7 +107,5 @@ export const deleteOrderFail = (error) => {
 export const deleteOrder = (orderId) => {
     return dispatch => {
         dispatch(deleteOrderStart());
-
-        console.log(orderId);
     }
 }
