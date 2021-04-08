@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
@@ -20,12 +20,12 @@ const asyncAuth = asyncComponent(() => {
   return import('./containers/Auth/Auth');
 });
 
-const App = (props) => {
+const App = props => {
   const { onTryAutoSignin } = props;
 
   useEffect(() => {
     onTryAutoSignin();
-  }, [onTryAutoSignin]);
+  }, []);
 
   let routes = (
     <Switch>
@@ -69,4 +69,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
